@@ -15,6 +15,11 @@
 		<servlet-name>GoodsServlet</servlet-name>
 		<servlet-class>com.mlb.estore.web.frontservlet.GoodsServlet</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>CartServlet</servlet-name>
+    <servlet-class>com.mlb.estore.web.frontservlet.CartServlet</servlet-class>
+  </servlet>
+
 
 	<servlet-mapping>
 		<servlet-name>UserServlet</servlet-name>
@@ -24,6 +29,10 @@
 		<servlet-name>GoodsServlet</servlet-name>
 		<url-pattern>/goodsServlet</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CartServlet</servlet-name>
+    <url-pattern>/cartServlet</url-pattern>
+  </servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -33,4 +42,8 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500.jsp</location>
+	</error-page>
 </web-app>

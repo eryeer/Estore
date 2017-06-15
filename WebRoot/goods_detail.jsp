@@ -107,11 +107,17 @@
 					<dd>
 						<strong>购买数量：</strong>
 						<input name="buynum" id="buynum" size="4" value="1" 
+						onkeyup="this.value=value.replace(/\D/gim,'');"
 						onkeypress="return !isNaN(String.fromCharCode(event.keyCode||event.which||event.charCode))"/>
 					</dd>
 				</li>
 				<li class="padd">
-					<a href="buyorcart.jsp">
+					<a href="javascript:;" onclick="
+					if(parseInt(buynum.value)==buynum.value){
+					  location='${path}/cartServlet?method=addToCart&gid=${goods.id}&buynum='+buynum.value;
+					}else{
+						alert('请输入合法字符');
+					}">
 						<img src="themes/ecmoban_jumei/images/goumai2.gif" />
 					</a>
 				</li>

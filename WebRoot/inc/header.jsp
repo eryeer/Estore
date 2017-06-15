@@ -88,10 +88,10 @@
 			</div>
 			<ul class="cart_info">
 				<li id="ECS_CARTINFO">
-					<div class="top_cart">
+					<div class="top_cart" onclick="location='${path}/cartServlet?method=cartList'">
 						<img src="themes/ecmoban_jumei/images/cart.gif" /> <span
-							class="carts_num none_f"><a href="cart.jsp" title="查看购物车">0</a></span>
-						<a href="cart.jsp" class="shopborder">去购物车结算</a>
+							class="carts_num none_f"><a href="javascript:;" title="查看购物车">0</a></span>
+						<a href="javascript:;" class="shopborder">去购物车结算</a>
 					</div>
 				</li>
 			</ul>
