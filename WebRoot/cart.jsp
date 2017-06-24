@@ -149,8 +149,8 @@ function check_cart(){
 									</font>元， 共为您节省了&nbsp;<font color="red"><span id="totaldiscount"><fmt:formatNumber
 													value="${totaldiscount}" pattern="#,###.00"></fmt:formatNumber>
 										</span>
-									</font>元 <a href="orders_submit.jsp"><input value="去结算"
-											type="button" class="btn" />
+									</font>元 <a href="javascript:;"  onclick="location='${path}/cartServlet?method=cartList&source=cartJsp';"><input value="去结算"
+											type="button" class="btn"/>
 									</a></td>
 								</tr>
 								</tbody>

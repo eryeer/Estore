@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" isErrorPage="true"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -49,7 +49,7 @@ a:hover {color: red}
           <TD height=8></TD>
         <TR>
           <TD>
-            <P><FONT color=#000000><BR>　　服务器出错啦！！</FONT>! 
+            <P><FONT color=#000000><BR>　<%=exception.getMessage()%>　服务器出错啦！！</FONT>! 
       　</P></TD></TR></TBODY>
 						</table>
 					</div>

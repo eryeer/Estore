@@ -6,10 +6,12 @@ import com.mlb.estore.domain.Cart;
 
 public interface CartService {
 
-	void addToCart(String uid, String gid, int buynum);
+	boolean addToCart(String uid, String gid, int buynum);
 
 	List<Cart> findAllByUid(String id);
 
 	void deleteCart(String uid, String gid);
+
+	Long getCartNumByUid(String uid);
 
 }

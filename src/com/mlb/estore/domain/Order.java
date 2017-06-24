@@ -1,6 +1,7 @@
 package com.mlb.estore.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Order {
 	private String id;
@@ -10,13 +11,39 @@ public class Order {
 	private int status;
 	private Timestamp createtime;
 
+	private List<OrderItem> list;
+
+	/**
+	 * @return the list
+	 */
+	public List<OrderItem> getList() {
+		return list;
+	}
+
+	/**
+	 * @param list
+	 *            the list to set
+	 */
+	public void setList(List<OrderItem> list) {
+		this.list = list;
+	}
+
 	public Order() {
 		super();
 
 	}
 
+	/**
+	 * @param id
+	 * @param uid
+	 * @param totalprice
+	 * @param address
+	 * @param status
+	 * @param createtime
+	 * @param list
+	 */
 	public Order(String id, String uid, double totalprice, String address,
-			int status, Timestamp createtime) {
+			int status, Timestamp createtime, List<OrderItem> list) {
 		super();
 		this.id = id;
 		this.uid = uid;
@@ -24,6 +51,7 @@ public class Order {
 		this.address = address;
 		this.status = status;
 		this.createtime = createtime;
+		this.list = list;
 	}
 
 	/**
@@ -125,7 +153,7 @@ public class Order {
 	public String toString() {
 		return "Order [id=" + id + ", uid=" + uid + ", totalprice="
 				+ totalprice + ", address=" + address + ", status=" + status
-				+ ", createtime=" + createtime + "]";
+				+ ", createtime=" + createtime + ", list=" + list + "]";
 	}
 
 }

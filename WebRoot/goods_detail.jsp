@@ -109,6 +109,7 @@
 						<input name="buynum" id="buynum" size="4" value="1" 
 						onkeyup="this.value=value.replace(/\D/gim,'');"
 						onkeypress="return !isNaN(String.fromCharCode(event.keyCode||event.which||event.charCode))"/>
+						(库存数量:${goods.num })
 					</dd>
 				</li>
 				<li class="padd">

@@ -2,9 +2,13 @@ package com.mlb.estore.utils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 
 public class TransactionManager {
+	// 初始化本地线程
 	private static final ThreadLocal<Connection> threadLocal = new ThreadLocal<Connection>();
+	// 声明回滚点
+	private static Savepoint savepoint;
 
 	public static Connection getCurrentConnection() {
 		Connection con = threadLocal.get();
@@ -32,6 +36,18 @@ public class TransactionManager {
 		}
 	}
 
+	// 设置回滚点
+	public static void setSavepoint() {
+		Connection con = getCurrentConnection();
+		try {
+			savepoint = con.setSavepoint();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException("设置回滚点失败");
+		}
+	}
+
 	public static void rollback() {
 		Connection con = getCurrentConnection();
 		try {
@@ -41,6 +57,18 @@ public class TransactionManager {
 			e.printStackTrace();
 			throw new RuntimeException("回滚事务失败");
 		}
+	}
+
+	public static void rollbackToLastSavepoint() {
+		Connection con = getCurrentConnection();
+		try {
+			con.rollback(savepoint);
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException("回滚至回滚点失败");
+		}
+
 	}
 
 	public static void end() {

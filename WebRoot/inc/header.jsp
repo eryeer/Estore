@@ -64,8 +64,9 @@
 							</div></li>
 					</ul>
 					<div class="header_r">
-						<a href="orders.jsp">我的订单</a>
+						<a href="${path}/orderServlet?method=orderList">我的订单</a>
 						<a href="${path}/goodsServlet?method=goodsList">商品列表</a>
+						<a href="${path}/admin.jsp">管理商品</a>
 					</div>
 				</div>
 			</div>
@@ -90,7 +91,30 @@
 				<li id="ECS_CARTINFO">
 					<div class="top_cart" onclick="location='${path}/cartServlet?method=cartList'">
 						<img src="themes/ecmoban_jumei/images/cart.gif" /> <span
-							class="carts_num none_f"><a href="javascript:;" title="查看购物车">0</a></span>
+							class="carts_num none_f"><a href="javascript:;" title="查看购物车">
+							<c:if test="${(empty sessionScope.user) or (sessionScope.user.role=='admin')}">0</c:if>
+							<c:if test="${sessionScope.user.role == 'user'}">
+								<span id="cart_num">0</span>
+								<script type="text/javascript">
+									function loadCartNum(){
+										ajax({
+											url:"${path}/cartServlet?method=getCartNumAJAX",
+											method:"post",
+											callback: function(data) {
+												if (data == "error") {
+													cart_num.innerHTML = 0;
+												}else if(data=="unlogin"){
+													cart_num.innerHTML = 0;
+												}else{
+													cart_num.innerHTML = data;
+												}
+											}
+										});
+									}
+									loadCartNum();
+								</script>
+							</c:if>
+							</a></span>
 						<a href="javascript:;" class="shopborder">去购物车结算</a>
 					</div>
 				</li>

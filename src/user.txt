@@ -1,0 +1,9 @@
+/cart.jsp
+/confirm.jsp
+/orders_detail.jsp
+/orders_submit.jsp
+/orders.jsp
+/pay.jsp
+/paymentServlet
+/orderServlet
+/cartServlet

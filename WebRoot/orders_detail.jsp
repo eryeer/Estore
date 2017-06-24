@@ -30,23 +30,31 @@
 							bgcolor="#dddddd">
 							<tr>
 								<td width="15%" align="right">订单编号：</td>
-								<td align="left">2016052674732</td>
+								<td align="left">${order.id}</td>
 							</tr>
 							<tr>
 								<td width="15%" align="right">订单状态：</td>
 								<td align="left">
-									<font color="red">未支付</font>？
-									<font color="green">已支付</font>？
-									<font color="gray">已过期</font>？
+									<c:choose>
+										<c:when test="${order.status==1}">
+											<font color="red">未支付</font>
+										</c:when>
+										<c:when test="${order.status==2}">
+											<font color="green">已支付</font>
+										</c:when>
+										<c:otherwise>
+											<font color="gray">已过期</font>
+										</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 							<tr>
 								<td width="15%" align="right">下单时间：</td>
-								<td align="left">2016-05-26 16:36:11</td>
+								<td align="left"><fmt:formatDate value="${order.createtime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 							</tr>
 							<tr>
 								<td align="right">收货人信息：</td>
-								<td align="left">上海 上海市 闵行区 浦江镇街道 浦江丽都 6-502 小丽15852086521</td>
+								<td align="left">${order.address}</td>
 							</tr>
 						</table>
 						<div class="blank"></div>
@@ -60,36 +68,29 @@
 								<th width="10%" align="center">购买数量</th>
 								<th width="20%" align="center">小计</th>
 							</tr>
+							
+							<c:forEach var="item" items="${order.list}">
 							<tr>
 								<td>
-									<a href="javascript:;" class="f6">佳洁士全优7效牙膏+漱口水装</a>
+									<a href="javascript:;" class="f6">${item.name}</a>
 								</td>
-								<td>26.40元</td>
-								<td>22.00元</td>
-								<td align="center">1</td>
-								<td>22.00元</td>
+								<td>${item.marketprice}元</td>
+								<td>${item.estoreprice}元</td>
+								<td align="center">${item.buynum}</td>
+								<td>${item.estoreprice * item.buynum}元</td>
 							</tr>
-							<tr>
-								<td><a href="javascript:;"
-									target="_blank" class="f6">珀莱雅(PROYA)新柔皙美白补水套装(洗颜霜120ml+玫瑰水120ml+保湿乳100ml)</a>
-								</td>
-								<td>193.00元</td>
-								<td>110.00元</td>
-								<td align="center">2</td>
-								<td>220.00元</td>
-							</tr>
-							<tr>
-								<td><a href="javascript:;"
-									target="_blank" class="f6">兰蔻清滢柔肤水400ml</a></td>
-								<td>420.00元</td>
-								<td>110.00元</td>
-								<td align="center">3</td>
-								<td>330.00元</td>
-							</tr>
+							</c:forEach>
 							<tr>
 								<td colspan="5" style="text-align:right;padding-right:10px;font-size:25px;">
-									商品总价&nbsp;<font color="red">&yen;572.00</font>元
-									<a href="pay.jsp"><input value="确认支付" type="button" class="btn" /></a>
+									商品总价&nbsp;<font color="red">&yen;${order.totalprice}</font>元
+									<c:choose>
+										<c:when test="${order.status==1}">
+											<a href="${path}/pay.jsp?oid=${order.id}&totalprice=${order.totalprice}"><input value="确认支付" type="button" class="btn" /></a>
+										</c:when>
+										<c:otherwise>
+											<a href="${path}/orderServlet?method=orderList"><input value="返回" type="button" class="btn" /></a>
+										</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 						</table>

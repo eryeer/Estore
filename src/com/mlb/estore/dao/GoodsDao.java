@@ -14,4 +14,12 @@ public interface GoodsDao {
 
 	Goods findGoodsById(String id);
 
+	List<Goods> getRanking();
+
+	int findNumById(String id);
+
+	void updateNumById(String id, int i);
+
+	void retrieveNumById(String id, int retrieveNum);
+
 }

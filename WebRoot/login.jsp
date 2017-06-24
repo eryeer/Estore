@@ -31,7 +31,7 @@
 							<td width="25%" align="right">邮箱</td>
 
 							<td width="65%"><input id="email" name="email" type="text"
-								size="25" class="inputBg" />
+								size="25" class="inputBg" placeholder="Email"/>
 							</td>
 							<script type="text/javascript">
 								email.value = decodeURIComponent("${cookie.remember_email.value}");
@@ -41,7 +41,7 @@
 						<tr>
 							<td align="right">密码</td>
 							<td><input name="password" type="password" size="15"
-								class="inputBg" />
+								class="inputBg" placeholder="Password"/>
 							</td>
 						</tr>
 						<tr>

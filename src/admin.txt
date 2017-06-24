@@ -1,0 +1,4 @@
+/adminServlet
+/admin_add.jsp
+/admin.jsp
+/ranking_online.jsp

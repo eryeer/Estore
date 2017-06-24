@@ -7,18 +7,48 @@
 	<!-- 由BaseServlet替代 <filter> <filter-name>EncodingFilter</filter-name> <filter-class>com.mlb.estore.filter.EncodingFilter</filter-class> 
 		</filter> <filter-mapping> <filter-name>EncodingFilter</filter-name> <url-pattern>/*</url-pattern> 
 		</filter-mapping> -->
+	<filter>
+		<filter-name>PrivilegeFilter</filter-name>
+		<filter-class>com.mlb.estore.filter.PrivilegeFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrivilegeFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+<!-- 	<listener>
+		<listener-class>com.mlb.estore.listener.ScanOrderStatusListener</listener-class>
+	</listener> -->
 	<servlet>
 		<servlet-name>UserServlet</servlet-name>
 		<servlet-class>com.mlb.estore.web.frontservlet.UserServlet</servlet-class>
 	</servlet>
-		<servlet>
+	<servlet>
 		<servlet-name>GoodsServlet</servlet-name>
 		<servlet-class>com.mlb.estore.web.frontservlet.GoodsServlet</servlet-class>
 	</servlet>
-  <servlet>
-    <servlet-name>CartServlet</servlet-name>
-    <servlet-class>com.mlb.estore.web.frontservlet.CartServlet</servlet-class>
-  </servlet>
+	<servlet>
+		<servlet-name>CartServlet</servlet-name>
+		<servlet-class>com.mlb.estore.web.frontservlet.CartServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>OrderServlet</servlet-name>
+		<servlet-class>com.mlb.estore.web.frontservlet.OrderServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>PaymentServlet</servlet-name>
+		<servlet-class>com.mlb.estore.web.frontservlet.PaymentServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>com.mlb.estore.web.frontservlet.AdminServlet</servlet-class>
+	</servlet>
+
+
+
+
+
+
 
 
 	<servlet-mapping>
@@ -29,10 +59,24 @@
 		<servlet-name>GoodsServlet</servlet-name>
 		<url-pattern>/goodsServlet</url-pattern>
 	</servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CartServlet</servlet-name>
-    <url-pattern>/cartServlet</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CartServlet</servlet-name>
+		<url-pattern>/cartServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OrderServlet</servlet-name>
+		<url-pattern>/orderServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>PaymentServlet</servlet-name>
+		<url-pattern>/paymentServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminServlet</servlet-name>
+		<url-pattern>/adminServlet</url-pattern>
+	</servlet-mapping>
+
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -45,5 +89,9 @@
 	<error-page>
 		<error-code>500</error-code>
 		<location>/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/400.jsp</location>
 	</error-page>
 </web-app>

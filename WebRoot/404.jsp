@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isErrorPage="true"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML>
@@ -56,7 +56,7 @@ A:hover {COLOR: red}
 								<TR>
 									<TD>
 										<P>
-											<FONT color=#000000><BR> 您所请求的页面不存在</FONT>!
+											<FONT color=#000000><BR><%=exception.getMessage()%> 您所请求的页面不存在</FONT>!
 										</P>
 									</TD>
 								</TR>

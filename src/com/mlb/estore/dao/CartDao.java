@@ -16,4 +16,8 @@ public interface CartDao {
 
 	void deleteCart(String uid, String gid);
 
+	Long getCartNumByUid(String uid);
+
+	void deleteCarts(String uid);
+
 }

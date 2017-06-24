@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.mlb.estore.constants.ConstantInner;
 import com.mlb.estore.domain.User;
 import com.mlb.estore.service.UserService;
 import com.mlb.estore.utils.ApacheMailUtils;
@@ -70,10 +71,10 @@ public class UserServlet extends BaseServlet {
 		try {
 			BeanUtils.populate(user, map);
 		} catch (IllegalAccessException e) {
-
+			logger.error(e.getMessage());
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-
+			logger.error(e.getMessage());
 			e.printStackTrace();
 		}
 		// 校验空值和密码不一致
@@ -94,8 +95,9 @@ public class UserServlet extends BaseServlet {
 		// 封装user存入数据库
 		user.setId(UUIDUtils.getUUID());
 		user.setRegistertime(new Timestamp(new Date().getTime()));
-		user.setStatus(0);
+		user.setStatus(ConstantInner.STATUS_USER.INACTIVATED);
 		user.setActivecode(UUIDUtils.getUUID());
+		user.setRole("user");
 		user.setPassword(MD5Utils.md5(user.getPassword()));
 		UserService userService = FactoryUtils.getInstance(UserService.class);
 		boolean result = userService.register(user);
@@ -134,13 +136,14 @@ public class UserServlet extends BaseServlet {
 		Timestamp registertime = existUser.getRegistertime();
 		long time = registertime.getTime();
 		long now = new Date().getTime();
-		if ((now - time) >= 1000 * 3600 * 24 && existUser.getStatus() == 0) {
+		if ((now - time) >= 1000 * 3600 * 24
+				&& existUser.getStatus() == ConstantInner.STATUS_USER.INACTIVATED) {
 			request.setAttribute("wrong_message", "激活码超时,重新注册");
 			userService.deleteUser(id);
 			return "/register.jsp";
 		}
 		// 已经注册直接跳转登录页面
-		if (existUser.getStatus() == 1) {
+		if (existUser.getStatus() == ConstantInner.STATUS_USER.ACTIVATED) {
 			return "/srlogin.jsp";
 		}
 		// 激活验证码
@@ -164,10 +167,10 @@ public class UserServlet extends BaseServlet {
 		try {
 			BeanUtils.populate(user, map);
 		} catch (IllegalAccessException e) {
-
+			logger.error(e.getMessage());
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-
+			logger.error(e.getMessage());
 			e.printStackTrace();
 		}
 		// 非空验证
@@ -206,7 +209,9 @@ public class UserServlet extends BaseServlet {
 		}
 		cookie.setPath("/");
 		response.addCookie(cookie);
+
 		return "/srindex.jsp";
+
 	}
 
 	public String logout(HttpServletRequest request,

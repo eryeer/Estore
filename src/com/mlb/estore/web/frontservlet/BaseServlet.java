@@ -8,9 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class BaseServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = LogManager.getLogger(BaseServlet.class);
 
 	@Override
 	protected void service(HttpServletRequest request,
@@ -40,8 +44,9 @@ public class BaseServlet extends HttpServlet {
 								response);
 					}
 				}
-			} catch (Exception e) {
 
+			} catch (Exception e) {
+				logger.error(e.getMessage());
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}

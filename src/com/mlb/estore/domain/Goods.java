@@ -10,6 +10,16 @@ public class Goods {
 	private String imgurl;
 	private String description;
 
+	private int salesnum;
+
+	public int getSalesnum() {
+		return salesnum;
+	}
+
+	public void setSalesnum(int salesNum) {
+		this.salesnum = salesNum;
+	}
+
 	public Goods() {
 		super();
 
@@ -149,17 +159,13 @@ public class Goods {
 		this.description = description;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Goods [id=" + id + ", name=" + name + ", marketprice="
 				+ marketprice + ", estoreprice=" + estoreprice + ", category="
 				+ category + ", num=" + num + ", imgurl=" + imgurl
-				+ ", description=" + description + "]";
+				+ ", description=" + description + ", salesnum=" + salesnum
+				+ "]";
 	}
 
 }

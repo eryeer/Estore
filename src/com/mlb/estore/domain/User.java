@@ -18,6 +18,7 @@ public class User {
 	private String activecode;
 	private int status;
 	private Timestamp registertime;
+	// user:用户 ;admin:管理员
 	private String role;
 
 	public User() {
